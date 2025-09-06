@@ -1,0 +1,12 @@
+# Environment and configuration files
+app/.env
+app/docker-compose.yml
+
+# Database files
+app/shop.db
+
+# Test directory
+app/test/
+
+# Virtual environment
+aics/

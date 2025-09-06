@@ -1,0 +1,6 @@
+FROM python:3.12-slim
+WORKDIR /app
+COPY client.py .
+RUN pip install --no-cache-dir requests ollama
+# Creating a loop so that it can act like a watcher
+CMD ["sh", "-c", "while true; do python -u client.py; sleep 15; done"]

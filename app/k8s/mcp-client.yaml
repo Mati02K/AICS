@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mcp-client
+  namespace: ops
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: mcp-client }
+  template:
+    metadata:
+      labels: { app: mcp-client }
+    spec:
+      containers:
+      - name: client
+        image: mcp-client:0.1
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            cpu: "1"
+            memory: "1Gi"
+          requests:
+            cpu: "500m"
+            memory: "512Mi"
+        env:
+        - name: MCP_SERVER
+          value: http://mcp-server:8055       
+        - name: SERVICE
+          value: api
+        - name: OLLAMA_HOST
+          value: http://ollama:11434         
+        - name: OLLAMA_MODEL
+          value: qwen2.5:1.5b-instruct                      
+        - name: MOCK_PLAN
+          value: "0"                         
